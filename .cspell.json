@@ -37,7 +37,9 @@
     "ComfyUI",
     "OpenRouter",
     "GPT4All",
-    "Janai"
+    "Janai",
+    "parseable",
+    "oversaturated"
   ],
   "ignorePaths": [
     ".git/**",
