@@ -1,7 +1,11 @@
 # Free Resources
-# A curated list of free AI tools, APIs, software, and platforms
-# Community maintained. PRs welcome.
-# Version: 0.1.0
+
+A curated list of free AI tools, APIs, software, and platforms
+
+Community maintained — PRs welcome
+
+## Version
+0.1.0
 
 ---
 
@@ -72,5 +76,8 @@
 ## Contributing
 
 Found a free tool worth adding? Open a PR.
-Format: `| Tool name | Yes / Partially | What it is good for |`
+
+Format:
+`| Tool name | Yes / Partially | What it is good for |`
+
 Verify the free tier exists before submitting.
