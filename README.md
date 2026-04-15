@@ -28,20 +28,20 @@ Claude reads it automatically. Costs ~30% less per session.
 
 ## Profile index
 
-| Profile | Best for | Works with |
-|---|---|---|
-| [universal](profiles/universal.md) | Any task, any AI | All AIs |
-| [casual-user](profiles/casual-user.md) | Everyday chat | All AIs |
-| [developer/frontend](profiles/developer/frontend.md) | UI, React, CSS | All AIs |
-| [developer/backend](profiles/developer/backend.md) | APIs, DBs, servers | All AIs |
-| [developer/fullstack](profiles/developer/fullstack.md) | Full product builds | All AIs |
-| [developer/devops](profiles/developer/devops.md) | CI/CD, infra, Docker | All AIs |
-| [analyst](profiles/analyst.md) | Data, finance, research | All AIs |
-| [agent](profiles/agent.md) | Automation, pipelines, bots | All AIs |
-| [advisor](profiles/advisor.md) | Business, strategy | All AIs |
-| [writer](profiles/writer.md) | Content, copywriting | All AIs |
-| [image-gen](profiles/image-gen/README.md) | Midjourney, DALL-E, Flux | Image AIs |
-| [free-resources](free-resources/README.md) | Free APIs, tools, software | Reference |
+| Profile                                                | Best for                    | Works with |
+| ------------------------------------------------------ | --------------------------- | ---------- |
+| [universal](profiles/universal.md)                     | Any task, any AI            | All AIs    |
+| [casual-user](profiles/casual-user.md)                 | Everyday chat               | All AIs    |
+| [developer/frontend](profiles/developer/frontend.md)   | UI, React, CSS              | All AIs    |
+| [developer/backend](profiles/developer/backend.md)     | APIs, DBs, servers          | All AIs    |
+| [developer/fullstack](profiles/developer/fullstack.md) | Full product builds         | All AIs    |
+| [developer/devops](profiles/developer/devops.md)       | CI/CD, infra, Docker        | All AIs    |
+| [analyst](profiles/analyst.md)                         | Data, finance, research     | All AIs    |
+| [agent](profiles/agent.md)                             | Automation, pipelines, bots | All AIs    |
+| [advisor](profiles/advisor.md)                         | Business, strategy          | All AIs    |
+| [writer](profiles/writer.md)                           | Content, copywriting        | All AIs    |
+| [image-gen](profiles/image-gen/README.md)              | Midjourney, DALL-E, Flux    | Image AIs  |
+| [free-resources](free-resources/README.md)             | Free APIs, tools, software  | Reference  |
 
 ---
 
@@ -49,7 +49,7 @@ Claude reads it automatically. Costs ~30% less per session.
 
 Every profile includes a compatibility header:
 
-```
+```text
 # Works with: Claude, ChatGPT, Gemini, Mistral, Llama
 ```
 
