@@ -1,0 +1,13 @@
+name: Bug report / Incorrect content
+about: Something in a profile is wrong or broken
+title: "[FIX] "
+labels: fix
+body:
+  - type: input
+    label: Which profile is affected?
+    placeholder: "e.g. profiles/developer/backend.md"
+  - type: textarea
+    label: What is wrong?
+    placeholder: "Be specific. Quote the line if possible."
+  - type: textarea
+    label: What should it say instead?

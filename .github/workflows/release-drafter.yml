@@ -1,0 +1,45 @@
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+
+categories:
+  - title: "New Profiles"
+    labels:
+      - "feature"
+  - title: "Improvements"
+    labels:
+      - "improvement"
+  - title: "Bug Fixes"
+    labels:
+      - "fix"
+  - title: "Documentation"
+    labels:
+      - "docs"
+  - title: "Free Resources"
+    labels:
+      - "free-resources"
+  - title: "CI / Automation"
+    labels:
+      - "ci"
+
+version-resolver:
+  major:
+    labels:
+      - "breaking"
+  minor:
+    labels:
+      - "feature"
+  patch:
+    labels:
+      - "fix"
+      - "improvement"
+      - "docs"
+      - "free-resources"
+      - "ci"
+  default: patch
+
+template: |
+  ## What changed in $RESOLVED_VERSION
+
+  $CHANGES
+
+  **Full changelog:** $PREVIOUS_TAG...v$RESOLVED_VERSION

@@ -1,0 +1,42 @@
+version: "2"
+
+language: "en-US"
+
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+
+  path_filters:
+    - "!**/*.png"
+    - "!**/*.jpg"
+    - "!**/*.gif"
+
+  path_instructions:
+    - path: "profiles/**/*.md"
+      instructions: |
+        Check that the profile includes the required header:
+        - Name
+        - Works with (list of AIs)
+        - Best for (use case)
+        - Extends (parent profile)
+        - Version
+
+        Check that it follows universal.md formatting rules:
+        - No em dashes
+        - No smart quotes
+        - No decorative Unicode
+        - Plain hyphens only
+
+        Flag any duplicate of an existing profile.
+
+    - path: "free-resources/**/*.md"
+      instructions: |
+        Check that every tool listed has a verified free tier.
+        Flag any entry that looks promotional or like an affiliate link.
+
+chat:
+  auto_reply: true

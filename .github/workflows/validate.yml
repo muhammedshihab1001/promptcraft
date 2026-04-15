@@ -1,0 +1,49 @@
+name: Validate Profiles
+
+on:
+  pull_request:
+    paths:
+      - "profiles/**/*.md"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate profile headers
+        shell: bash
+        run: |
+          FAILED=0
+
+          for file in profiles/**/*.md; do
+            echo "Checking: $file"
+
+            if ! grep -q "^# Works with:" "$file"; then
+              echo "MISSING: '# Works with:' in $file"
+              FAILED=1
+            fi
+
+            if ! grep -q "^# Best for:" "$file"; then
+              echo "MISSING: '# Best for:' in $file"
+              FAILED=1
+            fi
+
+            if ! grep -q "^# Version:" "$file"; then
+              echo "MISSING: '# Version:' in $file"
+              FAILED=1
+            fi
+
+            if grep -q " — " "$file"; then
+              echo "FOUND em dash in $file — remove it"
+              FAILED=1
+            fi
+          done
+
+          if [ $FAILED -eq 1 ]; then
+            echo ""
+            echo "Profile validation failed. Fix the issues above."
+            exit 1
+          fi
+
+          echo "All profiles valid."

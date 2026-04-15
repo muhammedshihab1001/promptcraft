@@ -1,0 +1,22 @@
+name: Spell Check
+
+on:
+  pull_request:
+    paths:
+      - "**/*.md"
+  push:
+    branches:
+      - main
+
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check spelling
+        uses: streetsidesoftware/cspell-action@v6
+        with:
+          files: "**/*.md"
+          config: ".cspell.json"
+          incremental_files_only: true

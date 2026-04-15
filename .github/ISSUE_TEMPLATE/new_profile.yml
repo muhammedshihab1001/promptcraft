@@ -1,0 +1,34 @@
+name: New Profile Request
+about: Suggest a new prompt profile
+title: "[PROFILE] "
+labels: feature
+body:
+  - type: input
+    attributes:
+      label: Profile name
+      placeholder: "e.g. data-engineer, game-dev, legal-advisor"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: What is this profile for?
+      placeholder: "Describe the use case in 2-3 sentences."
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: Which AIs did you test this with?
+      options:
+        - label: Claude
+        - label: ChatGPT
+        - label: Gemini
+        - label: Mistral
+        - label: Llama
+        - label: Other
+
+  - type: textarea
+    attributes:
+      label: Draft rules (optional)
+      placeholder: "Paste a rough draft of the profile rules if you have one."

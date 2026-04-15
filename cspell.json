@@ -1,0 +1,39 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "promptcraft",
+    "coderabbit",
+    "markdownlint",
+    "devops",
+    "fullstack",
+    "Groq",
+    "Mistral",
+    "Ollama",
+    "Ideogram",
+    "Leonardo",
+    "Midjourney",
+    "DALL",
+    "Hugging",
+    "Supabase",
+    "Vercel",
+    "PlanetScale",
+    "Cloudflare",
+    "automate",
+    "subagents",
+    "idempotent",
+    "dockerignore",
+    "cspell",
+    "CODEOWNERS",
+    "drona",
+    "stdin",
+    "stdout",
+    "stderr",
+    "yaml",
+    "yml"
+  ],
+  "ignorePaths": [
+    ".git/**",
+    "node_modules/**"
+  ]
+}

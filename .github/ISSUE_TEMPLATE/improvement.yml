@@ -1,0 +1,25 @@
+name: Improvement
+about: Suggest an improvement to an existing profile
+title: "[IMPROVE] "
+labels: improvement
+body:
+  - type: input
+    attributes:
+      label: Which profile?
+      placeholder: "e.g. profiles/developer/backend.md"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: What should change?
+      placeholder: "Be specific. Quote the line if possible."
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Why is this better?
+      placeholder: "What problem does this fix or what output does it improve?"
+    validations:
+      required: true

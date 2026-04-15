@@ -1,0 +1,20 @@
+feature:
+  - profiles/**/*.md
+
+docs:
+  - README.md
+  - "**/*.md"
+  - "!profiles/**"
+
+free-resources:
+  - free-resources/**
+
+improvement:
+  - profiles/universal.md
+  - .coderabbit.yaml
+  - .markdownlint.json
+
+ci:
+  - .github/workflows/**
+  - .cspell.json
+  - .markdownlint.json
