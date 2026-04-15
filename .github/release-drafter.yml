@@ -42,4 +42,8 @@ template: |
 
   $CHANGES
 
+  {% if CHANGES == "" %}
+  - No significant changes
+  {% endif %}
+
   **Full changelog:** $PREVIOUS_TAG...v$RESOLVED_VERSION
