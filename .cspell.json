@@ -30,7 +30,10 @@
     "stdout",
     "stderr",
     "yaml",
-    "yml"
+    "yml",
+
+    "Canva",
+    "Excalidraw"
   ],
   "ignorePaths": [
     ".git/**",

@@ -1,7 +1,13 @@
 # Image Generation Profile
-# Works with: Midjourney, DALL-E 3, Flux, Ideogram, Leonardo AI, Stable Diffusion
-# Best for: Generating high-quality prompts for image AI tools
-# Version: 0.1.0
+
+## Works with
+Midjourney, DALL-E 3, Flux, Ideogram, Leonardo AI, Stable Diffusion
+
+## Best for
+Generating high-quality prompts for image AI tools
+
+## Version
+0.1.0
 
 ---
 
