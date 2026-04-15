@@ -33,7 +33,11 @@
     "yml",
 
     "Canva",
-    "Excalidraw"
+    "Excalidraw",
+    "ComfyUI",
+    "OpenRouter",
+    "GPT4All",
+    "Janai"
   ],
   "ignorePaths": [
     ".git/**",

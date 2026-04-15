@@ -1,6 +1,7 @@
-# Universal Profile
-# Works with: Claude, ChatGPT, Gemini, Mistral, Llama, and others
+# Name: Universal Profile
+# Works with: Claude, ChatGPT, Gemini, Mistral, Llama, others
 # Best for: Any task, any AI
+# Extends: None
 # Version: 0.1.0
 
 ---
