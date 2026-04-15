@@ -61,4 +61,3 @@ blurry, low quality, watermark, text, extra limbs, distorted, oversaturated
 | Ideogram         | ~500 chars        | No                 | Great for text in images     |
 | Leonardo AI      | ~500 chars        | Yes                | Use preset styles            |
 | Stable Diffusion | No hard limit     | Yes                | Most flexible                |
-cs
