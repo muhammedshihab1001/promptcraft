@@ -1,20 +1,38 @@
 feature:
-  - profiles/**/*.md
+  - changed-files:
+    - any-glob-to-any-file:
+      - "profiles/**/*.md"
+  - head-branch: ["^profile/"]
+
+fix:
+  - head-branch: ["^fix/"]
 
 docs:
-  - README.md
-  - "**/*.md"
-  - "!profiles/**"
+  - changed-files:
+    - any-glob-to-any-file:
+      - "README.md"
+      - "ROADMAP.md"
+      - "CHANGELOG.md"
+      - ".github/CONTRIBUTING.md"
+      - ".github/CODE_OF_CONDUCT.md"
+      - ".github/SECURITY.md"
 
 free-resources:
-  - free-resources/**
+  - changed-files:
+    - any-glob-to-any-file:
+      - "free-resources/**"
 
 improvement:
-  - profiles/universal.md
-  - .coderabbit.yaml
-  - .markdownlint.json
+  - changed-files:
+    - any-glob-to-any-file:
+      - "profiles/universal.md"
+      - ".coderabbit.yaml"
+      - ".markdownlint.json"
+      - ".cspell.json"
 
 ci:
-  - .github/workflows/**
-  - .cspell.json
-  - .markdownlint.json
+  - changed-files:
+    - any-glob-to-any-file:
+      - ".github/workflows/**"
+      - ".github/labeler.yml"
+      - ".github/release-drafter.yml"
