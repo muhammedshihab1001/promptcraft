@@ -26,17 +26,17 @@ Thanks for contributing. Read this before opening a PR.
 Every profile must include this header:
 
 ```md
-# Profile Name
+# Name: Profile Name
 # Works with: Claude, ChatGPT, Gemini, [others]
 # Best for: [use case]
-# Extends: [parent profile or "none"]
+# Extends: [parent profile or "None"]
 # Version: 0.1.0
 ```
 
 Profiles must:
 - Be testable (paste it, run it, it works)
 - Follow the formatting rules in `profiles/universal.md`
-- Not exceed 60 lines unless the use case requires more
+- Focus on one use case. No padding or filler rules.
 
 ---
 
@@ -61,7 +61,7 @@ Profiles must:
 | `docs` | README or documentation only |
 | `free-resources` | Addition to free resources list |
 | `needs-work` | Reviewer requested changes |
-| `good-first-issue` | Good for new contributors |
+| `good first issue` | Good for new contributors |
 
 ---
 
