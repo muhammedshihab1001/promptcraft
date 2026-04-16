@@ -39,7 +39,8 @@
     "GPT4All",
     "Janai",
     "parseable",
-    "oversaturated"
+    "oversaturated",
+    "docstring"
   ],
   "ignorePaths": [
     ".git/**",
