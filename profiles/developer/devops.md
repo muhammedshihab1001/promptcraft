@@ -1,4 +1,4 @@
-# Developer Profile - DevOps
+# Name: Developer Profile - DevOps
 # Works with: Claude, ChatGPT, Gemini, Mistral, Llama, and others
 # Best for: CI/CD, Docker, Kubernetes, infrastructure, monitoring
 # Extends: universal.md

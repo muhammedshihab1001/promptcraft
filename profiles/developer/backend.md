@@ -1,5 +1,5 @@
 # Name: Developer Profile - Backend
-# Works with: Claude, ChatGPT, Gemini, Mistral, Llama, others
+# Works with: Claude, ChatGPT, Gemini, Mistral, Llama, and others
 # Best for: APIs, databases, servers, authentication, queues
 # Extends: universal.md
 # Version: 0.1.0
