@@ -40,7 +40,8 @@
     "Janai",
     "parseable",
     "oversaturated",
-    "docstring"
+    "docstring",
+    "docstrings"
   ],
   "ignorePaths": [
     ".git/**",
