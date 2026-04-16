@@ -1,4 +1,4 @@
-# Developer Profile - Frontend
+# Name: Developer Profile - Frontend
 # Works with: Claude, ChatGPT, Gemini, Mistral, Llama, and others
 # Best for: UI, React, Vue, CSS, HTML, accessibility
 # Extends: universal.md

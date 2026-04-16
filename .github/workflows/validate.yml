@@ -15,18 +15,14 @@ jobs:
       - name: Validate profile headers
         shell: bash
         run: |
-          shopt -s globstar nullglob
-
           FAILED=0
 
-          files=(profiles/**/*.md)
+          while IFS= read -r -d '' file; do
+            if [[ "$file" == "profiles/universal.md" ]]; then
+              echo "Skipping base profile: $file"
+              continue
+            fi
 
-          if [ ${#files[@]} -eq 0 ]; then
-            echo "No profile files found."
-            exit 0
-          fi
-
-          for file in "${files[@]}"; do
             echo "Checking: $file"
 
             grep -q "^# Name:" "$file" || { echo "MISSING: '# Name:' in $file"; FAILED=1; }
@@ -35,22 +31,17 @@ jobs:
             grep -q "^# Extends:" "$file" || { echo "MISSING: '# Extends:' in $file"; FAILED=1; }
             grep -q "^# Version:" "$file" || { echo "MISSING: '# Version:' in $file"; FAILED=1; }
 
-            # Em dash check
-            if grep -q $'\u2014' "$file"; then
+            if grep -qP "\x{2014}" "$file"; then
               echo "FOUND em dash in $file - remove it"
               FAILED=1
             fi
 
-            # Smart quotes check
-            if grep -q $'\u2018' "$file" || \
-               grep -q $'\u2019' "$file" || \
-               grep -q $'\u201C' "$file" || \
-               grep -q $'\u201D' "$file"; then
+            if grep -qP "[\x{2018}\x{2019}\x{201C}\x{201D}]" "$file"; then
               echo "FOUND smart quotes in $file - replace with plain quotes"
               FAILED=1
             fi
 
-          done
+          done < <(find profiles -name "*.md" -print0)
 
           if [ $FAILED -eq 1 ]; then
             echo ""

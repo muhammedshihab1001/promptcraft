@@ -4,10 +4,22 @@ title: "[FIX] "
 labels: fix
 body:
   - type: input
-    label: Which profile is affected?
-    placeholder: "e.g. profiles/developer/backend.md"
+    attributes:
+      label: Which profile is affected?
+      placeholder: "e.g. profiles/developer/backend.md"
+    validations:
+      required: true
+
   - type: textarea
-    label: What is wrong?
-    placeholder: "Be specific. Quote the line if possible."
+    attributes:
+      label: What is wrong?
+      placeholder: "Be specific. Quote the line if possible."
+    validations:
+      required: true
+
   - type: textarea
-    label: What should it say instead?
+    attributes:
+      label: What should it say instead?
+      placeholder: "Paste the corrected version here."
+    validations:
+      required: true

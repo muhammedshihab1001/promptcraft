@@ -1,4 +1,4 @@
-# Developer Profile - Fullstack
+# Name: Developer Profile - Fullstack
 # Works with: Claude, ChatGPT, Gemini, Mistral, Llama, and others
 # Best for: Full product builds, end-to-end features
 # Extends: developer/frontend.md + developer/backend.md

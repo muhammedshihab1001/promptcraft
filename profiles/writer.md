@@ -1,4 +1,4 @@
-# Writer Profile
+# Name: Writer Profile
 # Works with: Claude, ChatGPT, Gemini, Mistral, Llama, and others
 # Best for: Content writing, copywriting, blogs, emails, social posts
 # Extends: universal.md
