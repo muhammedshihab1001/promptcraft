@@ -3,10 +3,13 @@ version: "2"
 language: "en-US"
 
 reviews:
-  enabled: true
-
   auto_review:
     enabled: true
+
+  path_filters:
+    - "!**/*.png"
+    - "!**/*.jpg"
+    - "!**/*.gif"
 
   path_instructions:
     - path: "profiles/**/*.md"
@@ -31,10 +34,5 @@ reviews:
         Check that every tool listed has a verified free tier.
         Flag any entry that looks promotional or like an affiliate link.
 
-  exclude_paths:
-    - "**/*.png"
-    - "**/*.jpg"
-    - "**/*.gif"
-
 chat:
-  enabled: true
+  auto_reply: true
