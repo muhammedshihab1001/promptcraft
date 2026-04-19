@@ -14,7 +14,10 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const author = context.payload.discussion.user.login;
+            const owner = context.repo.owner;
             const discussionNodeId = context.payload.discussion.node_id;
+
+            if (author === owner) return;
 
             await github.graphql(`
               mutation AddComment($discussionId: ID!, $body: String!) {
@@ -32,5 +35,8 @@ jobs:
                     `- Be respectful to others\n` +
                     `- No spam or self-promotion\n` +
                     `- Stay on topic\n\n` +
+                    `📖 Please read our guidelines before posting:\n` +
+                    `- [Code of Conduct](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/.github/CODE_OF_CONDUCT.md)\n` +
+                    `- [Contributing Guide](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/.github/CONTRIBUTING.md)\n\n` +
                     `Our team will respond shortly. 🚀`
             });

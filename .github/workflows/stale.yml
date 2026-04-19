@@ -1,54 +1,56 @@
-# This workflow automatically marks issues and PRs as stale after 14 days of inactivity
-# and closes them after 7 more days if there is still no activity.
-# This keeps the issue tracker clean and signals when contributors have moved on.
+# This workflow automatically marks issues, PRs and discussions as stale
+# after 14 days of inactivity and closes them after 7 more days if there
+# is still no activity.
 # Maintainers can exempt items using the labels listed below.
 
-name: Close Stale PRs and Issues
+name: Close Stale PRs, Issues and Discussions
 
 on:
-  # Run every day at midnight UTC
   schedule:
     - cron: "0 0 * * *"
-  # Also allow manual trigger from the Actions tab if needed
   workflow_dispatch:
 
 jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-      # actions/stale@v9 is the latest version as of April 2025
       - uses: actions/stale@v9
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-          # Message posted when an issue becomes stale
+          # --- Issues ---
           stale-issue-message: >
             This issue has had no activity for 14 days.
             It will be closed in 7 days unless there is new activity.
-
-          # Message posted when a stale issue is closed
           close-issue-message: >
             Closing due to inactivity. Re-open if still relevant.
 
-          # Message posted when a PR becomes stale
+          # --- PRs ---
           stale-pr-message: >
             This PR has had no activity for 14 days.
             It will be closed in 7 days unless there is new activity.
-
-          # Message posted when a stale PR is closed
           close-pr-message: >
             Closing due to inactivity. Re-open when ready to continue.
 
-          # Number of days without activity before marking as stale
+          # --- Discussions ---
+          stale-discussion-message: >
+            This discussion has had no activity for 30 days.
+            It will be closed in 7 days unless there is new activity.
+          close-discussion-message: >
+            Closing due to inactivity. Feel free to re-open if still relevant.
+
+          # --- Timings ---
           days-before-stale: 14
-
-          # Number of days after stale label before closing
           days-before-close: 7
+          days-before-discussion-stale: 30
+          days-before-discussion-close: 7
 
-          # Labels applied when items go stale
+          # --- Labels ---
           stale-issue-label: stale
           stale-pr-label: stale
+          stale-discussion-label: stale
 
-          # These labels prevent an issue or PR from ever being marked stale
+          # --- Exemptions ---
           exempt-issue-labels: "pinned,security,good-first-issue"
           exempt-pr-labels: "pinned,security"
+          exempt-discussion-labels: "pinned,announcement"
