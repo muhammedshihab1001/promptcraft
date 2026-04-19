@@ -1,69 +1,126 @@
-# This workflow posts an automatic comment when a PR is opened
-# and a congratulation comment when a PR is merged.
-# It helps contributors feel welcomed and acknowledged.
-
 name: PR Greeting
 
 on:
   pull_request:
-    # Triggers when a PR is opened or merged (closed with merge)
-    types: [opened, closed]
+    types:
+      - opened
+      - closed
 
-# Minimum permissions needed — only writing to pull request comments
 permissions:
   pull-requests: write
 
 jobs:
-
-  # Job 1: Welcome message when a PR is first opened
   greet-on-open:
-    # Only run this job when the PR is newly opened, not on other close events
-    if: github.event.action == 'opened'
+    if: ${{ github.event.action == 'opened' }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Post welcome comment
         uses: actions/github-script@v7
         with:
           script: |
-            github.rest.issues.createComment({
+            const prAuthor = context.payload.pull_request.user.login;
+            const owner = context.repo.owner;
+
+            // Never greet the repo owner on their own PRs
+            if (prAuthor === owner) {
+              console.log("Skipping greeting - repo owner");
+              return;
+            }
+
+            // Count merged PRs
+            const mergedPRs = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "closed",
+              per_page: 100
+            });
+
+            const mergedCount = mergedPRs.data.filter(function(pr) {
+              return pr.user.login === prAuthor && pr.merged_at !== null;
+            }).length;
+
+            // Skip returning contributors
+            if (mergedCount >= 2) {
+              console.log("Skipping greeting - returning contributor");
+              return;
+            }
+
+            // SAME MESSAGE (unchanged)
+            const message = [
+              "👋 Thanks for opening this PR!",
+              "",
+              "Here is a quick checklist before review starts:",
+              "",
+              "- [ ] Profile includes all required header fields (Name, Works with, Best for, Extends, Version)",
+              "- [ ] Tested with at least one AI tool",
+              "- [ ] No duplicate of an existing profile",
+              "- [ ] Follows formatting rules in profiles/universal.md",
+              "- [ ] No em dashes or smart quotes",
+              "- [ ] Free resource entries have a verified free tier (if applicable)",
+              "",
+              "A maintainer will review shortly. If you have questions, drop them in the comments."
+            ].join("\n");
+
+            await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `👋 Thanks for opening this PR!
+              body: message
+            });
 
-            Here is a quick checklist before review starts:
-
-            - [ ] Profile includes all required header fields (Name, Works with, Best for, Extends, Version)
-            - [ ] Tested with at least one AI tool
-            - [ ] No duplicate of an existing profile
-            - [ ] Follows formatting rules in \`profiles/universal.md\`
-            - [ ] No em dashes or smart quotes
-            - [ ] Free resource entries have a verified free tier (if applicable)
-
-            A maintainer will review shortly. If you have questions, drop them in the comments.`
-            })
-
-  # Job 2: Congratulation message when a PR is successfully merged
   greet-on-merge:
-    # Only run when the PR was closed by merging, not just closed/rejected
-    if: github.event.action == 'closed' && github.event.pull_request.merged == true
+    if: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Post merge congratulation comment
         uses: actions/github-script@v7
         with:
           script: |
-            github.rest.issues.createComment({
+            const prAuthor = context.payload.pull_request.user.login;
+            const owner = context.repo.owner;
+
+            // Never post on repo owner's PR
+            if (prAuthor === owner) {
+              console.log("Skipping merge message - repo owner");
+              return;
+            }
+
+            // Count merged PRs
+            const mergedPRs = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "closed",
+              per_page: 100
+            });
+
+            const mergedCount = mergedPRs.data.filter(function(pr) {
+              return pr.user.login === prAuthor && pr.merged_at !== null;
+            }).length;
+
+            // Skip experienced contributors
+            if (mergedCount > 2) {
+              console.log("Skipping merge message - experienced contributor");
+              return;
+            }
+
+            // SAME MESSAGE (unchanged)
+            const message = [
+              "🎉 Merged! Thanks for contributing to promptcraft.",
+              "",
+              "Your changes are now part of the project. Here is what happens next:",
+              "",
+              "- A release draft will be updated automatically",
+              "- Your contribution will appear in the next changelog",
+              "- The profile index will reflect your changes on the next release",
+              "",
+              "Appreciate the effort. Feel free to open another issue or PR anytime."
+            ].join("\n");
+
+            await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `🎉 Merged! Thanks for contributing to promptcraft.
-
-            Your changes are now part of the project. Here is what happens next:
-
-            - A release draft will be updated automatically
-            - Your contribution will appear in the next changelog
-            - The profile index will reflect your changes on the next release
-
-            Appreciate the effort. Feel free to open another issue or PR anytime.`
-            })
+              body: message
+            });
