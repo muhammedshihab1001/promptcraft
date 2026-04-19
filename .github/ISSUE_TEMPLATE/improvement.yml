@@ -2,7 +2,8 @@ type: issue
 name: Improvement
 description: Suggest an improvement to an existing profile
 title: "[IMPROVE] "
-labels: ["improvement"]
+labels:
+  - improvement
 
 body:
   - type: input

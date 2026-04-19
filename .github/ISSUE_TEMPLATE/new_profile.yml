@@ -2,7 +2,8 @@ type: issue
 name: New Profile Request
 description: Suggest a new prompt profile
 title: "[PROFILE] "
-labels: ["feature"]
+labels:
+  - feature
 
 body:
   - type: input

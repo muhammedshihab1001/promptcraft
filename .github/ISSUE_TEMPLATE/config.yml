@@ -3,7 +3,7 @@
 # blank_issues_enabled: false forces contributors to use a template.
 # If you want to allow blank issues, change it to true.
 
-blank_issues_enabled: false
+blank_issues_enabled: true
 
 contact_links:
   - name: Read before opening an issue

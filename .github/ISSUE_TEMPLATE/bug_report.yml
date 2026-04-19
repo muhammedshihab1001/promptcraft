@@ -2,7 +2,8 @@ type: issue
 name: Bug report / Incorrect content
 description: Something in a profile is wrong or broken
 title: "[FIX] "
-labels: ["fix"]
+labels:
+  - fix
 
 body:
   - type: input
