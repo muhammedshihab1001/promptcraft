@@ -1,0 +1,11 @@
+# This file controls the issue template chooser screen on GitHub.
+# Without this file, GitHub does not show the template selection screen.
+# blank_issues_enabled: false forces contributors to use a template.
+# If you want to allow blank issues, change it to true.
+
+blank_issues_enabled: false
+
+contact_links:
+  - name: Read before opening an issue
+    url: https://github.com/muhammedshihab1001/promptcraft/blob/main/.github/CONTRIBUTING.md
+    about: Check the contributing guide first — your question may already be answered.
