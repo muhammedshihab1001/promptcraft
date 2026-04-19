@@ -12,12 +12,14 @@
 
 ## v0.2.0 - More profiles
 
-- [ ] data-engineer profile
-- [ ] game-dev profile
-- [ ] legal-advisor profile
-- [ ] educator profile
-- [ ] mobile-dev profile (iOS, Android, React Native)
-- [ ] security profile (pen testing, threat modeling)
+Priority order — start from the top:
+
+- [ ] **data-engineer** — highest demand, most requested
+- [ ] **security** — pen testing, threat modeling
+- [ ] mobile-dev — iOS, Android, React Native
+- [ ] game-dev — game design and development
+- [ ] educator — teaching, course creation, lesson plans
+- [ ] legal-advisor — legal research and document review
 
 ## v0.3.0 - Quality and testing
 
@@ -27,15 +29,19 @@
 
 ## v0.4.0 - Multilingual
 
-- [ ] Spanish translations
-- [ ] Hindi translations
-- [ ] Community-led translation process
+Malayalam is the maintainer's native language and will serve as the pilot for the translation process.
+Once the format and tooling are established, contributions in other languages are welcome.
+
+- [ ] Malayalam translations of core profiles
+- [ ] Translation contributor guide
+- [ ] profiles/lang/ folder structure and naming convention
 
 ## v1.0.0 - Stable
 
 - [ ] All core profiles tested across 3+ AIs
 - [ ] Docs site (GitHub Pages)
 - [ ] Full contributor guide with examples
+- [ ] 10+ community-submitted profiles
 
 ---
 

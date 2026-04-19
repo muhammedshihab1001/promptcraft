@@ -23,3 +23,15 @@ body:
       placeholder: "What problem does this fix or what output does it improve?"
     validations:
       required: true
+
+  - type: checkboxes
+    attributes:
+      label: Which AI did you observe this with?
+      description: "Check all that apply. Helps maintainers know if this is AI-specific or universal."
+      options:
+        - label: Claude
+        - label: ChatGPT
+        - label: Gemini
+        - label: Mistral
+        - label: Llama
+        - label: Other

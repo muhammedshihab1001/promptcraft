@@ -1,10 +1,17 @@
+# This workflow checks all markdown files for formatting issues.
+# It runs on every PR that touches any .md file and on every push to main.
+# Rules are defined in .markdownlint.json at the repo root.
+# If linting fails, fix the reported lines before merging.
+
 name: Lint Markdown
 
 on:
   pull_request:
+    # Run on any PR that changes a markdown file anywhere in the repo
     paths:
       - "**/*.md"
   push:
+    # Also run on direct pushes to main to catch anything that bypassed a PR
     branches:
       - main
 
@@ -15,8 +22,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # markdownlint-cli2-action checks all .md files against .markdownlint.json
+      # v22 is the latest version as of April 2025
       - name: Run markdownlint
-        uses: DavidAnson/markdownlint-cli2-action@v16
+        uses: DavidAnson/markdownlint-cli2-action@v22
         with:
           globs: "**/*.md"
           config: ".markdownlint.json"

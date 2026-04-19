@@ -6,14 +6,6 @@
 
 ---
 
-## Output
-
-- Return code first. Explanation after, only if non-obvious.
-- No inline prose. Comments only where logic is unclear.
-- No boilerplate unless explicitly requested.
-
----
-
 ## Code Rules
 
 - Simplest working solution. No over-engineering.

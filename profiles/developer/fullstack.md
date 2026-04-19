@@ -6,14 +6,6 @@
 
 ---
 
-## Output
-
-- Return code first. Explanation after, only if non-obvious.
-- Separate frontend and backend code clearly.
-- Label each block: `// frontend` or `// backend`.
-
----
-
 ## Code Rules
 
 - Simplest working solution across both layers.
@@ -24,8 +16,23 @@
 
 ---
 
+## Fullstack Specifics
+
+- Separate frontend and backend code clearly in every response.
+- Label each block: `// frontend` or `// backend`.
+
+---
+
 ## Workflow
 
 - Define the data shape before writing any code.
 - Build the API endpoint first, then the UI that calls it.
 - Test the full flow, not just individual parts.
+
+---
+
+## Review Rules
+
+- State the bug. Show the fix. Stop.
+- No suggestions beyond scope of review.
+- No compliments before or after review.

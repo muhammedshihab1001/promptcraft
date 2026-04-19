@@ -17,37 +17,63 @@ Thanks for contributing. Read this before opening a PR.
 - Profiles that duplicate existing ones
 - AI-generated filler or padding in profiles
 - Promotional content or affiliate links in free-resources
-- Unverified tools in free-resources (verify the free tier exists)
+- Unverified tools in free-resources (verify the free tier exists and include the date you verified it)
 
 ---
 
 ## Profile standards
 
-Every profile must include this header:
+Every profile must include this header at the top of the file:
 
 ```md
 # Name: Profile Name
 # Works with: Claude, ChatGPT, Gemini, [others]
 # Best for: [use case]
 # Extends: [parent profile or "None"]
-# Version: 0.1.0
+# Version: [check CHANGELOG.md for the current version number]
 ```
 
 Profiles must:
-- Be testable (paste it, run it, it works)
+- Be testable (paste it into an AI session, run it, it works)
 - Follow the formatting rules in `profiles/universal.md`
-- Focus on one use case. No padding or filler rules.
+- Focus on one use case — no padding or filler rules
+- Use plain hyphens only — no em dashes (—)
+- Use straight quotes only — no smart quotes (" " ' ')
+
+---
+
+## Free resources standards
+
+- Every entry must have a verified free tier
+- Include the date you verified it in your PR description
+- Do not add tools where the free tier requires a credit card without a note saying so
+- Remove suggestions are welcome — if a free tier has disappeared, open a fix PR
 
 ---
 
 ## PR process
 
 1. Fork the repo
-2. Create a branch: `profile/your-profile-name` or `fix/description`
+2. Create a branch using the correct naming pattern (see below)
 3. Make your changes
 4. Test the profile with at least one AI before submitting
 5. Open a PR using the PR template
 6. Wait for review
+
+---
+
+## Branch naming
+
+Use these patterns — the auto-labeler depends on them:
+
+| Change type | Branch pattern | Example |
+|---|---|---|
+| New profile | `profile/profile-name` | `profile/data-engineer` |
+| Fix | `fix/description` | `fix/backend-typo` |
+| Improvement | `improvement/description` | `improvement/agent-error-schema` |
+| Translation | `translation/lang-profilename` | `translation/ml-developer-backend` |
+
+**Breaking changes** (removing or renaming required header fields) require the `breaking` label to be added manually by a maintainer before merge. If your PR introduces a breaking change, note it clearly in the PR description.
 
 ---
 
@@ -60,6 +86,9 @@ Profiles must:
 | `improvement` | Refinement of existing profile |
 | `docs` | README or documentation only |
 | `free-resources` | Addition to free resources list |
+| `translation` | Translated version of a profile |
+| `ci` | Changes to workflows or automation |
+| `breaking` | Removes or renames a required field — major version bump — maintainer adds manually |
 | `needs-work` | Reviewer requested changes |
 | `good first issue` | Good for new contributors |
 
@@ -67,7 +96,8 @@ Profiles must:
 
 ## Stale PRs
 
-PRs with no activity for 14 days are closed automatically.
+PRs with no activity for 14 days are marked stale automatically.
+They are closed after 7 more days with no activity.
 Re-open if you want to continue.
 
 ---

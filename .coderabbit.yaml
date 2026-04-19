@@ -1,38 +1,54 @@
+# CodeRabbit automatically reviews PRs using AI.
+# This file configures what CodeRabbit checks for in different parts of the repo.
+# path_instructions tell CodeRabbit what to look for in specific folders.
+# The more specific the instructions, the more useful the review comments.
+
 version: "2"
 
 language: "en-US"
 
 reviews:
   auto_review:
+    # Automatically review every PR — no need to trigger manually
     enabled: true
 
+  # Exclude binary files from review — CodeRabbit cannot do anything useful with them
   path_filters:
     - "!**/*.png"
     - "!**/*.jpg"
     - "!**/*.gif"
 
   path_instructions:
+    # Rules for reviewing new or changed profile files
     - path: "profiles/**/*.md"
       instructions: |
-        Check that the profile includes the required header:
+        Check that the profile includes all five required header fields:
         - Name
         - Works with (list of AIs)
         - Best for (use case)
-        - Extends (parent profile)
+        - Extends (parent profile or "None")
         - Version
 
         Check that it follows universal.md formatting rules:
-        - No em dashes
-        - No smart quotes
-        - No decorative Unicode
-        - Plain hyphens only
+        - No em dashes (—) — use plain hyphens (-) only
+        - No smart quotes (" " ' ') — use straight quotes only
+        - No decorative Unicode characters
 
-        Flag any duplicate of an existing profile.
+        Check for potential duplicates using these criteria:
+        - Flag if the "Best for:" field closely matches an existing profile's "Best for:" field
+        - Flag if the "Name:" matches or closely resembles an existing profile name
+        - Flag if the profile rules appear more than 70% similar to an existing profile
+        - Reference the profile index in README.md to check for overlaps
+        - If flagging a duplicate, name the specific existing profile it overlaps with
 
+    # Rules for reviewing free-resources entries
     - path: "free-resources/**/*.md"
       instructions: |
         Check that every tool listed has a verified free tier.
+        Flag any entry where the free tier status is unclear or unverified.
         Flag any entry that looks promotional or like an affiliate link.
+        Flag any entry that does not include a last verified date if one is expected.
 
 chat:
+  # CodeRabbit will automatically reply to review comment threads
   auto_reply: true
