@@ -1,0 +1,36 @@
+name: Welcome New Discussion
+
+on:
+  discussion:
+    types: [created]
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post Welcome Message
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const author = context.payload.discussion.user.login;
+            const discussionNodeId = context.payload.discussion.node_id;
+
+            await github.graphql(`
+              mutation AddComment($discussionId: ID!, $body: String!) {
+                addDiscussionComment(input: {
+                  discussionId: $discussionId,
+                  body: $body
+                }) {
+                  comment { id }
+                }
+              }
+            `, {
+              discussionId: discussionNodeId,
+              body: `👋 Hey @${author}, welcome and thanks for starting a discussion!\n\n` +
+                    `📌 **Please keep in mind:**\n` +
+                    `- Be respectful to others\n` +
+                    `- No spam or self-promotion\n` +
+                    `- Stay on topic\n\n` +
+                    `Our team will respond shortly. 🚀`
+            });
