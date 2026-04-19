@@ -1,27 +1,27 @@
+type: issue
 name: New Profile Request
-about: Suggest a new prompt profile
+description: Suggest a new prompt profile
 title: "[PROFILE] "
-labels: feature
+labels: ["feature"]
+
 body:
   - type: input
     attributes:
       label: Profile name
-      placeholder: "e.g. data-engineer, game-dev, legal-advisor"
+      placeholder: "e.g. data-engineer"
     validations:
       required: true
 
   - type: textarea
     attributes:
       label: What is this profile for?
-      placeholder: "Describe the use case in 2-3 sentences."
     validations:
       required: true
 
   - type: input
     attributes:
       label: Which profile does this extend?
-      placeholder: "e.g. universal.md or developer/backend.md — write universal.md if unsure"
-      description: "Every profile must extend an existing one. Check profiles/ for options."
+      placeholder: "e.g. universal.md"
     validations:
       required: false
 
@@ -39,4 +39,3 @@ body:
   - type: textarea
     attributes:
       label: Draft rules (optional)
-      placeholder: "Paste a rough draft of the profile rules if you have one."
