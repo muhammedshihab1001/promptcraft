@@ -1,6 +1,16 @@
+# This file controls how release notes are automatically drafted.
+# Every time a PR is merged to main, release-drafter updates a draft release.
+# When ready to publish, go to GitHub Releases and publish the draft manually.
+#
+# How versioning works:
+# - A PR labelled "feature" bumps the minor version (0.1.0 → 0.2.0)
+# - A PR labelled "fix", "improvement", "docs", "free-resources", or "ci" bumps patch (0.1.0 → 0.1.1)
+# - A PR labelled "breaking" bumps the major version (0.1.0 → 1.0.0) — add this label manually
+
 name-template: "v$RESOLVED_VERSION"
 tag-template: "v$RESOLVED_VERSION"
 
+# These sections appear in the release notes, grouped by label
 categories:
   - title: "New Profiles"
     labels:
@@ -17,10 +27,14 @@ categories:
   - title: "Free Resources"
     labels:
       - "free-resources"
+  - title: "Translations"
+    labels:
+      - "translation"
   - title: "CI / Automation"
     labels:
       - "ci"
 
+# Which label controls which version number gets bumped
 version-resolver:
   major:
     labels:
@@ -34,9 +48,11 @@ version-resolver:
       - "improvement"
       - "docs"
       - "free-resources"
+      - "translation"
       - "ci"
   default: patch
 
+# Template for the release notes body
 template: |
   ## What changed in $RESOLVED_VERSION
 

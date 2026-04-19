@@ -1,12 +1,21 @@
+# This file tells the Auto Label workflow which label to apply to a PR.
+# Labels are matched by: files changed OR branch name pattern.
+# Labels are used by release-drafter to sort changes into release note sections.
+# Add new labels here when you add new categories to release-drafter.yml.
+
+# Applied when new profile files are added or changed
 feature:
   - changed-files:
     - any-glob-to-any-file:
       - "profiles/**/*.md"
+  # Also applied when the branch name starts with profile/
   - head-branch: ["^profile/"]
 
+# Applied when fixing typos, outdated info, or broken formatting
 fix:
   - head-branch: ["^fix/"]
 
+# Applied when changing README, ROADMAP, CHANGELOG, or community docs
 docs:
   - changed-files:
     - any-glob-to-any-file:
@@ -17,11 +26,13 @@ docs:
       - ".github/CODE_OF_CONDUCT.md"
       - ".github/SECURITY.md"
 
+# Applied when adding or updating free-resources entries
 free-resources:
   - changed-files:
     - any-glob-to-any-file:
       - "free-resources/**"
 
+# Applied when improving an existing profile or config file
 improvement:
   - changed-files:
     - any-glob-to-any-file:
@@ -29,10 +40,25 @@ improvement:
       - ".coderabbit.yaml"
       - ".markdownlint.json"
       - ".cspell.json"
+  - head-branch: ["^improvement/"]
 
+# Applied when changing GitHub Actions workflows or automation config
 ci:
   - changed-files:
     - any-glob-to-any-file:
       - ".github/workflows/**"
       - ".github/labeler.yml"
       - ".github/release-drafter.yml"
+
+# Applied when adding translated versions of profiles
+# Translation files go in profiles/lang/ — see CONTRIBUTING.md
+translation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - "profiles/lang/**"
+  - head-branch: ["^translation/"]
+
+# Applied manually by maintainers only — triggers a major version bump in release-drafter
+# Do not add this label via labeler — it must be a deliberate human decision
+# To use: add the "breaking" label manually to any PR that removes or renames profile fields
+# breaking: (intentionally no auto-rule — manual only)

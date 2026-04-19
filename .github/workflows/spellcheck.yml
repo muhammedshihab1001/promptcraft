@@ -1,10 +1,17 @@
+# This workflow checks spelling in all markdown files.
+# It runs on PRs that change .md files and on pushes to main.
+# The wordlist (custom terms, tool names, proper nouns) is in .cspell.json.
+# If a word is flagged incorrectly, add it to the "words" list in .cspell.json.
+
 name: Spell Check
 
 on:
   pull_request:
+    # Run on any PR that changes a markdown file
     paths:
       - "**/*.md"
   push:
+    # Also run on direct pushes to main
     branches:
       - main
 
@@ -15,9 +22,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # cspell-action@v6 is the latest version as of April 2025
+      # Only checks files changed in the PR to keep runs fast
       - name: Check spelling
         uses: streetsidesoftware/cspell-action@v6
         with:
           files: "**/*.md"
           config: ".cspell.json"
+          # Only check files that changed in this PR, not the entire repo every time
           incremental_files_only: true

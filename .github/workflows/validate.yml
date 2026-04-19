@@ -1,7 +1,13 @@
+# This workflow runs every time a PR touches a profile file.
+# It checks that every profile has the required header fields
+# and does not contain formatting violations like em dashes or smart quotes.
+# If any check fails, the PR cannot be merged until it is fixed.
+
 name: Validate Profiles
 
 on:
   pull_request:
+    # Only runs when files inside the profiles/ folder are changed
     paths:
       - "profiles/**/*.md"
 
@@ -18,26 +24,41 @@ jobs:
           FAILED=0
 
           while IFS= read -r -d '' file; do
+
+            # Skip the base profile — it intentionally does not extend anything
             if [[ "$file" == "profiles/universal.md" ]]; then
               echo "Skipping base profile: $file"
               continue
             fi
 
-            echo "Checking: $file"
-
-            grep -q "^# Name:" "$file" || { echo "MISSING: '# Name:' in $file"; FAILED=1; }
-            grep -q "^# Works with:" "$file" || { echo "MISSING: '# Works with:' in $file"; FAILED=1; }
-            grep -q "^# Best for:" "$file" || { echo "MISSING: '# Best for:' in $file"; FAILED=1; }
-            grep -q "^# Extends:" "$file" || { echo "MISSING: '# Extends:' in $file"; FAILED=1; }
-            grep -q "^# Version:" "$file" || { echo "MISSING: '# Version:' in $file"; FAILED=1; }
-
-            if grep -qP "\x{2014}" "$file"; then
-              echo "FOUND em dash in $file - remove it"
-              FAILED=1
+            # Skip the image-gen README — it uses a different format
+            if [[ "$file" == "profiles/image-gen/README.md" ]]; then
+              echo "Skipping image-gen profile: $file"
+              continue
             fi
 
-            if grep -qP "[\x{2018}\x{2019}\x{201C}\x{201D}]" "$file"; then
-              echo "FOUND smart quotes in $file - replace with plain quotes"
+            # Skip translation files — they live in profiles/lang/ and may use non-English headers
+            if [[ "$file" == profiles/lang/* ]]; then
+              echo "Skipping translation file: $file"
+              continue
+            fi
+
+            echo "Checking: $file"
+
+            # Check all five required header fields exist at the start of a line
+            grep -q "^# Name:"       "$file" || { echo "MISSING: '# Name:' in $file";       FAILED=1; }
+            grep -q "^# Works with:" "$file" || { echo "MISSING: '# Works with:' in $file"; FAILED=1; }
+            grep -q "^# Best for:"   "$file" || { echo "MISSING: '# Best for:' in $file";   FAILED=1; }
+            grep -q "^# Extends:"    "$file" || { echo "MISSING: '# Extends:' in $file";    FAILED=1; }
+            grep -q "^# Version:"    "$file" || { echo "MISSING: '# Version:' in $file";    FAILED=1; }
+
+            # Run the Python checker script for em dash and smart quote detection.
+            # The script lives in .github/scripts/check_profile.py
+            # Using a separate file avoids YAML quoting and indentation conflicts.
+            python3 .github/scripts/check_profile.py "$file"
+
+            # Capture the Python exit code and mark the overall job as failed
+            if [ $? -ne 0 ]; then
               FAILED=1
             fi
 
@@ -45,7 +66,7 @@ jobs:
 
           if [ $FAILED -eq 1 ]; then
             echo ""
-            echo "Profile validation failed. Fix the issues above."
+            echo "Profile validation failed. Fix the issues listed above before merging."
             exit 1
           fi
 

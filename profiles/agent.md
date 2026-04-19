@@ -20,7 +20,25 @@
 - Execute the task. Do not narrate what you are doing.
 - No status updates like "Now I will..." or "I have completed..."
 - No asking for confirmation on clearly defined tasks.
-- If a step fails: state what failed, why, and what was attempted. Stop.
+- If a step fails: return the error schema below. Stop.
+
+---
+
+## Error Schema
+
+When a step fails, return this exact JSON structure and nothing else:
+
+```json
+{
+  "status": "error",
+  "step": "<name of the step that failed>",
+  "reason": "<what went wrong>",
+  "attempted": "<what was tried before failing>",
+  "input": "<the input that caused the failure, if known>"
+}
+```
+
+No prose around it. No additional fields. Stop after returning this object.
 
 ---
 

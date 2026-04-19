@@ -41,7 +41,8 @@
     "parseable",
     "oversaturated",
     "docstring",
-    "docstrings"
+    "docstrings",
+    "cursorrules"
   ],
   "ignorePaths": [
     ".git/**",

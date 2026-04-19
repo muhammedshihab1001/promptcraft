@@ -43,11 +43,13 @@ blurry, low quality, watermark, text, extra limbs, distorted, oversaturated
 
 ## Per-tool Notes
 
+> Last verified: 2026-04-19 — tool limits change with model updates. Check each tool's docs for current values.
+
 | Tool | Max prompt length | Supports negatives | Notes |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Midjourney | ~60 words ideal | Yes, with `--no` | Use `--ar` for aspect ratio |
 | DALL-E 3 | ~4000 chars | No | Describe in natural language |
 | Flux | No hard limit | Yes | Very prompt-sensitive |
-| Ideogram | ~500 chars | No | Great for text in images |
+| Ideogram | ~500 chars | Yes | Great for text in images |
 | Leonardo AI | ~500 chars | Yes | Use preset styles |
 | Stable Diffusion | No hard limit | Yes | Most flexible |

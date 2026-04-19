@@ -23,3 +23,15 @@ body:
       placeholder: "Paste the corrected version here."
     validations:
       required: true
+
+  - type: checkboxes
+    attributes:
+      label: Which AI did you observe this with?
+      description: "Check all that apply. Helps maintainers reproduce the issue."
+      options:
+        - label: Claude
+        - label: ChatGPT
+        - label: Gemini
+        - label: Mistral
+        - label: Llama
+        - label: Other

@@ -1,10 +1,16 @@
+# This workflow automatically updates a draft release every time something is merged to main.
+# It reads .github/release-drafter.yml to know how to categorize changes.
+# When you are ready to publish a release, go to GitHub Releases and publish the draft manually.
+
 name: Release Drafter
 
 on:
   push:
+    # Only draft releases based on merges to main
     branches:
       - main
 
+# These permissions are required to create and update release drafts
 permissions:
   contents: write
   pull-requests: write
@@ -13,6 +19,8 @@ jobs:
   draft_release:
     runs-on: ubuntu-latest
     steps:
+      # release-drafter@v6 is the latest version as of April 2025
+      # Configuration is in .github/release-drafter.yml
       - uses: release-drafter/release-drafter@v6
         with:
           config-name: release-drafter.yml

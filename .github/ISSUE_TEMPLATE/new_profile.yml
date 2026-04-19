@@ -17,6 +17,14 @@ body:
     validations:
       required: true
 
+  - type: input
+    attributes:
+      label: Which profile does this extend?
+      placeholder: "e.g. universal.md or developer/backend.md — write universal.md if unsure"
+      description: "Every profile must extend an existing one. Check profiles/ for options."
+    validations:
+      required: false
+
   - type: checkboxes
     attributes:
       label: Which AIs did you test this with?
