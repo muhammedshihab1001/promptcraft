@@ -7,11 +7,10 @@ name: Spell Check
 
 on:
   pull_request:
-    # Run on any PR that changes a markdown file
     paths:
       - "**/*.md"
+      - ".github/workflows/**/*.yml"   # ← add this
   push:
-    # Also run on direct pushes to main
     branches:
       - main
 

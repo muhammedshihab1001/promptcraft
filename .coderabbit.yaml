@@ -1,25 +1,16 @@
-# CodeRabbit automatically reviews PRs using AI.
-# This file configures what CodeRabbit checks for in different parts of the repo.
-# path_instructions tell CodeRabbit what to look for in specific folders.
-# The more specific the instructions, the more useful the review comments.
-
-version: "2"
 
 language: "en-US"
 
 reviews:
   auto_review:
-    # Automatically review every PR — no need to trigger manually
     enabled: true
 
-  # Exclude binary files from review — CodeRabbit cannot do anything useful with them
   path_filters:
     - "!**/*.png"
     - "!**/*.jpg"
     - "!**/*.gif"
 
   path_instructions:
-    # Rules for reviewing new or changed profile files
     - path: "profiles/**/*.md"
       instructions: |
         Check that the profile includes all five required header fields:
@@ -41,7 +32,6 @@ reviews:
         - Reference the profile index in README.md to check for overlaps
         - If flagging a duplicate, name the specific existing profile it overlaps with
 
-    # Rules for reviewing free-resources entries
     - path: "free-resources/**/*.md"
       instructions: |
         Check that every tool listed has a verified free tier.
@@ -50,5 +40,4 @@ reviews:
         Flag any entry that does not include a last verified date if one is expected.
 
 chat:
-  # CodeRabbit will automatically reply to review comment threads
   auto_reply: true
