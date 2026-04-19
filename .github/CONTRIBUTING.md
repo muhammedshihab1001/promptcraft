@@ -67,7 +67,7 @@ Profiles must:
 Use these patterns — the auto-labeler depends on them:
 
 | Change type | Branch pattern | Example |
-|---|---|---|
+| --- | --- | --- |
 | New profile | `profile/profile-name` | `profile/data-engineer` |
 | Fix | `fix/description` | `fix/backend-typo` |
 | Improvement | `improvement/description` | `improvement/agent-error-schema` |
@@ -77,10 +77,8 @@ Use these patterns — the auto-labeler depends on them:
 
 ---
 
-## Labels
-
 | Label | Meaning |
-|---|---|
+| --- | --- |
 | `feature` | New profile or major addition |
 | `fix` | Correction to existing content |
 | `improvement` | Refinement of existing profile |
