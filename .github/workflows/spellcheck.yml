@@ -1,5 +1,5 @@
 # This workflow checks spelling in all markdown files.
-# It runs on PRs that change .md files and on pushes to main.
+# It runs on every PR and on every push to main.
 # The wordlist (custom terms, tool names, proper nouns) is in .cspell.json.
 # If a word is flagged incorrectly, add it to the "words" list in .cspell.json.
 
@@ -7,8 +7,6 @@ name: Spell Check
 
 on:
   pull_request:
-    paths:
-      - "**/*.md"
   push:
     branches:
       - main

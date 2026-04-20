@@ -1,5 +1,5 @@
 # This workflow checks all markdown files for formatting issues.
-# It runs on every PR that touches any .md file and on every push to main.
+# It runs on every PR and on every push to main.
 # Rules are defined in .markdownlint.json at the repo root.
 # If linting fails, fix the reported lines before merging.
 
@@ -7,8 +7,6 @@ name: Lint Markdown
 
 on:
   pull_request:
-    paths:
-      - "**/*.md"
   push:
     branches:
       - main
