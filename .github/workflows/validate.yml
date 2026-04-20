@@ -83,12 +83,17 @@ jobs:
             if [[ "$file" == "profiles/image-gen/README.md" ]]; then continue; fi
             if [[ "$file" == profiles/lang/* ]]; then continue; fi
 
-            # Check the file path appears as a table row in the Profile index section only
-            # Scoping to the section prevents false passes from mentions elsewhere in README
-            profile_row="| \`$file\` |"
-            if ! awk '/^## Profile index/{in_section=1; next} /^## /{in_section=0} in_section' README.md | grep -qF "$profile_row"; then
+            # Check the file path appears as a markdown link in the Profile index section.
+            # README rows use the format: | [name](profiles/...md) | ... |
+            # The awk block scopes the search to the ## Profile index section only.
+            if ! awk -v f="$file" '
+              /^## Profile index/{in_section=1; next}
+              /^## /{in_section=0}
+              in_section && index($0, "](" f ") |") { found=1 }
+              END { exit(found ? 0 : 1) }
+            ' README.md; then
               echo "MISSING from README profile index: $file"
-              echo "Add a row starting with: $profile_row"
+              echo "Add a Profile index row linking to: $file"
               FAILED=1
             fi
 
