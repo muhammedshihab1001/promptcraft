@@ -19,7 +19,6 @@ jobs:
   draft_release:
     runs-on: ubuntu-latest
     steps:
-      # release-drafter@v6 is the latest version as of April 2025
       # Configuration is in .github/release-drafter.yml
       - uses: release-drafter/release-drafter@v6
         with:
