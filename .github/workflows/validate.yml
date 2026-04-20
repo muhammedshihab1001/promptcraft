@@ -1,6 +1,7 @@
 # This workflow runs every time a PR touches a profile file.
 # It checks that every profile has the required header fields
 # and does not contain formatting violations like em dashes or smart quotes.
+# It also checks that every profile is listed in README.md.
 # If any check fails, the PR cannot be merged until it is fixed.
 
 name: Validate Profiles
@@ -52,12 +53,10 @@ jobs:
             grep -q "^# Extends:"    "$file" || { echo "MISSING: '# Extends:' in $file";    FAILED=1; }
             grep -q "^# Version:"    "$file" || { echo "MISSING: '# Version:' in $file";    FAILED=1; }
 
-            # Run the Python checker script for em dash and smart quote detection.
-            # The script lives in .github/scripts/check_profile.py
-            # Using a separate file avoids YAML quoting and indentation conflicts.
+            # Run the Python checker script for em dash, smart quote, empty value,
+            # and Extends file existence checks.
             python3 .github/scripts/check_profile.py "$file"
 
-            # Capture the Python exit code and mark the overall job as failed
             if [ $? -ne 0 ]; then
               FAILED=1
             fi
@@ -71,3 +70,31 @@ jobs:
           fi
 
           echo "All profiles valid."
+
+      - name: Check profiles listed in README
+        shell: bash
+        run: |
+          FAILED=0
+
+          while IFS= read -r -d '' file; do
+
+            # Apply same skip list as header validation
+            if [[ "$file" == "profiles/universal.md" ]]; then continue; fi
+            if [[ "$file" == "profiles/image-gen/README.md" ]]; then continue; fi
+            if [[ "$file" == profiles/lang/* ]]; then continue; fi
+
+            # Check the file path appears somewhere in README.md
+            if ! grep -qF "$file" README.md; then
+              echo "MISSING from README profile index: $file"
+              FAILED=1
+            fi
+
+          done < <(find profiles -name "*.md" -print0)
+
+          if [ $FAILED -eq 1 ]; then
+            echo ""
+            echo "Add missing profiles to the profile index table in README.md."
+            exit 1
+          fi
+
+          echo "All profiles listed in README."

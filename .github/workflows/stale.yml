@@ -41,7 +41,7 @@ jobs:
           stale-pr-label: stale
 
           # --- Exemptions ---
-          exempt-issue-labels: "pinned,security,good-first-issue"
+          exempt-issue-labels: "pinned,security,good first issue"
           exempt-pr-labels: "pinned,security"
 
   # Handles Discussions separately (actions/stale does not support discussions)

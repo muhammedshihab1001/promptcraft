@@ -9,7 +9,6 @@ on:
   pull_request:
     paths:
       - "**/*.md"
-      - ".github/workflows/**/*.yml"   # ← add this
   push:
     branches:
       - main
@@ -21,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # cspell-action@v6 is the latest version as of April 2025
+      # cspell-action@v6 is the latest stable version
       # Only checks files changed in the PR to keep runs fast
       - name: Check spelling
         uses: streetsidesoftware/cspell-action@v6
