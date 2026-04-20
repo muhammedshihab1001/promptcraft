@@ -1,4 +1,3 @@
-
 language: "en-US"
 
 reviews:
@@ -13,6 +12,8 @@ reviews:
   path_instructions:
     - path: "profiles/**/*.md"
       instructions: |
+        Skip this review if the file path starts with profiles/lang/ — translation files are reviewed separately.
+
         Check that the profile includes all five required header fields:
         - Name
         - Works with (list of AIs)
@@ -31,6 +32,16 @@ reviews:
         - Flag if the profile rules appear more than 70% similar to an existing profile
         - Reference the profile index in README.md to check for overlaps
         - If flagging a duplicate, name the specific existing profile it overlaps with
+
+        Check that the profile path appears in the README.md profile index table.
+        If it does not, flag it with the exact row to add.
+
+    - path: "profiles/lang/**"
+      instructions: |
+        This is a translation file. Do not apply English header format checks.
+        Check that the file follows the structure of the original English profile it translates.
+        Check that no content has been added or removed beyond translation.
+        Check that formatting rules still apply: no em dashes, no smart quotes.
 
     - path: "free-resources/**/*.md"
       instructions: |
