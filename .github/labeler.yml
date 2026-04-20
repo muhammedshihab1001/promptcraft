@@ -42,11 +42,12 @@ improvement:
       - ".cspell.json"
   - head-branch: ["^improvement/"]
 
-# Applied when changing GitHub Actions workflows or automation config
+# Applied when changing GitHub Actions workflows, scripts, or automation config
 ci:
   - changed-files:
     - any-glob-to-any-file:
       - ".github/workflows/**"
+      - ".github/scripts/**"
       - ".github/labeler.yml"
       - ".github/release-drafter.yml"
 
