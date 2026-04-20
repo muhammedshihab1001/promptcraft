@@ -31,7 +31,6 @@
     "stderr",
     "yaml",
     "yml",
-
     "Canva",
     "Excalidraw",
     "ComfyUI",
@@ -42,7 +41,14 @@
     "oversaturated",
     "docstring",
     "docstrings",
-    "cursorrules"
+    "cursorrules",
+    "nullable",
+    "subqueries",
+    "DAGs",
+    "CTE",
+    "ELT",
+    "idempotency",
+    "Automatic1111"
   ],
   "ignorePaths": [
     ".git/**",
