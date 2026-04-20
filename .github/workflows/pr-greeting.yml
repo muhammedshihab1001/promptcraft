@@ -46,7 +46,6 @@ jobs:
               return;
             }
 
-            // SAME MESSAGE (unchanged)
             const message = [
               "👋 Thanks for opening this PR!",
               "",
@@ -100,12 +99,11 @@ jobs:
             }).length;
 
             // Skip experienced contributors
-            if (mergedCount > 2) {
-              console.log("Skipping merge message - experienced contributor");
+            if (mergedCount >= 2) {
+              console.log("Skipping merge message - returning contributor");
               return;
             }
 
-            // SAME MESSAGE (unchanged)
             const message = [
               "🎉 Merged! Thanks for contributing to promptcraft.",
               "",
