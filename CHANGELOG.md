@@ -14,40 +14,39 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [0.1.2] - 2026-04-21
-
-### Fixed
-
-- `validate.yml` README index check now matches markdown link format and scopes
-  to the Profile index section only
-- `check_profile.py` header field checks now scoped to leading metadata block only
-- `check_profile.py` Extends validation uses `pathlib` to block path traversal
-  and directory matches
-- `lint.yml` and `spellcheck.yml` path filters removed so required checks always
-  report status on every PR
-
----
-
-## [0.1.1] - 2026-04-21
+## [0.1.3] - 2026-04-21
 
 ### Added
 
 - Developer profile: data-engineer
+- Issue templates: CI and documentation
 
 ### Fixed
 
 - `cspell.json` missing technical terms: nullable, subqueries, DAGs, CTE, ELT,
   idempotency, Automatic1111
-- `lint.yml` and `spellcheck.yml` incorrect `.yml` path trigger removed
-- `release.yml` stale version comment updated
+- `lint.yml` and `spellcheck.yml` path filters removed so required checks always
+  report status on every PR
+- `labeler.yml` feature label now uses head-branch only — profile edits no longer
+  incorrectly trigger a minor version bump
 - `labeler.yml` ci label now covers `.github/scripts/` path
-- `stale.yml` exempt label fixed from `good-first-issue` to `good first issue`
+- `stale.yml` exempt label fixed and needs-work label added to PR exemptions
 - `pr-greeting.yml` contributor threshold aligned between open and merge jobs
+- `check_profile.py` header field checks scoped to metadata block only
+- `check_profile.py` Extends validation uses pathlib to block path traversal
 - `check_profile.py` now validates header fields have non-empty values
-- `check_profile.py` Extends field now checked against filesystem
+- `check_profile.py` Extends field checked against filesystem
+- `validate.yml` README index check scoped to Profile index section and uses
+  markdown link format matching
 - `validate.yml` added CI step to verify profiles are listed in README index
 - `coderabbit.yaml` translation files excluded from English review instructions
-- `fullstack.md` Extends field corrected from multi-parent format to `universal.md`
+- `fullstack.md` Extends field corrected to universal.md
+- `release.yml` stale version comment updated
+
+### Changed
+
+- ROADMAP.md: data-engineer marked complete
+- CONTRIBUTING.md: Extends field rules documented, branch naming clarified
 
 ---
 
@@ -74,7 +73,6 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-[Unreleased]: https://github.com/muhammedshihab1001/promptcraft/compare/v0.1.2...HEAD
-[0.1.2]: https://github.com/muhammedshihab1001/promptcraft/compare/v0.1.1...v0.1.2
-[0.1.1]: https://github.com/muhammedshihab1001/promptcraft/compare/v0.1.0...v0.1.1
+[Unreleased]: https://github.com/muhammedshihab1001/promptcraft/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/muhammedshihab1001/promptcraft/compare/v0.1.0...v0.1.3
 [0.1.0]: https://github.com/muhammedshihab1001/promptcraft/releases/tag/v0.1.0
