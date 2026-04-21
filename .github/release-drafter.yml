@@ -3,9 +3,9 @@
 # When ready to publish, go to GitHub Releases and publish the draft manually.
 #
 # How versioning works:
-# - A PR labelled "feature" bumps the minor version (0.1.0 → 0.2.0)
-# - A PR labelled "fix", "improvement", "docs", "free-resources", or "ci" bumps patch (0.1.0 → 0.1.1)
-# - A PR labelled "breaking" bumps the major version (0.1.0 → 1.0.0) — add this label manually
+# - All changes (new profiles, fixes, improvements, docs, ci) bump patch (0.1.x)
+# - A PR labelled "breaking" bumps the major version (0.1.0 → 1.0.0) — add manually
+# - Minor version bumps (0.1.0 → 0.2.0) are done manually at ROADMAP milestones
 
 name-template: "v$RESOLVED_VERSION"
 tag-template: "v$RESOLVED_VERSION"
@@ -34,16 +34,18 @@ categories:
     labels:
       - "ci"
 
-# Which label controls which version number gets bumped
+# All labels trigger patch bumps.
+# Minor bumps are done manually at ROADMAP milestones.
+# Major bumps require the "breaking" label added manually by a maintainer.
 version-resolver:
   major:
     labels:
       - "breaking"
   minor:
-    labels:
-      - "feature"
+    labels: []
   patch:
     labels:
+      - "feature"
       - "fix"
       - "improvement"
       - "docs"
@@ -57,9 +59,5 @@ template: |
   ## What changed in $RESOLVED_VERSION
 
   $CHANGES
-
-  {% if CHANGES == "" %}
-  - No significant changes
-  {% endif %}
 
   **Full changelog:** $PREVIOUS_TAG...v$RESOLVED_VERSION
