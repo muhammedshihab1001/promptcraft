@@ -48,7 +48,8 @@
     "CTE",
     "ELT",
     "idempotency",
-    "Automatic1111"
+    "Automatic1111",
+    "pathlib"
   ],
   "ignorePaths": [
     ".git/**",
