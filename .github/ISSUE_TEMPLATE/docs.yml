@@ -1,0 +1,28 @@
+type: issue
+name: Documentation issue
+description: Something in the docs, README, CONTRIBUTING, or ROADMAP is wrong or missing
+title: "[DOCS] "
+labels:
+  - docs
+
+body:
+  - type: input
+    attributes:
+      label: Which file or section?
+      placeholder: "e.g. .github/CONTRIBUTING.md — Profile standards section"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: What is wrong or missing?
+      placeholder: "Be specific. Quote the line if possible."
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: What should it say instead?
+      placeholder: "Paste the corrected or missing content here."
+    validations:
+      required: true

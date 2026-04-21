@@ -1,0 +1,35 @@
+type: issue
+name: CI / Automation issue
+description: Something in a workflow, script, or automation config is wrong or missing
+title: "[CI] "
+labels:
+  - ci
+
+body:
+  - type: input
+    attributes:
+      label: Which file is affected?
+      placeholder: "e.g. .github/workflows/validate.yml"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: What is wrong?
+      placeholder: "Be specific. Quote the line or step if possible."
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: What should happen instead?
+      placeholder: "Describe the expected behavior."
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Steps to reproduce (if applicable)
+      placeholder: "e.g. open a PR that changes a workflow file — lint check runs unnecessarily"
+    validations:
+      required: false
