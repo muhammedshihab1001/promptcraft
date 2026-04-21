@@ -1,6 +1,12 @@
 # This workflow automatically marks issues and PRs as stale after 14 days
 # of inactivity and closes them after 7 more days if there is still no activity.
-# Note: actions/stale does not support Discussions — a separate job handles those.
+# Discussions are handled separately using GitHub GraphQL — no third-party action needed.
+#
+# Discussion stale flow:
+#   Day 0-29:  No action
+#   Day 30:    Post warning + apply stale label
+#   Day 30+:   If new non-bot activity appears → remove stale label, reset timer
+#   Day 37+:   If no new activity after warning → close discussion
 
 name: Close Stale PRs, Issues and Discussions
 
@@ -44,18 +50,173 @@ jobs:
           exempt-issue-labels: "pinned,security,good first issue"
           exempt-pr-labels: "pinned,security,needs-work"
 
-  # Handles Discussions separately (actions/stale does not support discussions)
+  # Handles Discussions using GitHub GraphQL directly.
+  # Uses the stale label as state. Resets if new activity appears after warning.
   stale-discussions:
     runs-on: ubuntu-latest
+    permissions:
+      discussions: write
     steps:
-      - uses: aws-github-ops/handle-stale-discussions@v1
+      - name: Close stale discussions
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          days-before-stale: 30
-          days-before-close: 7
-          stale-message: >
-            This discussion has had no activity for 30 days.
-            It will be closed in 7 days unless there is new activity.
-          close-message: >
-            Closing due to inactivity. Feel free to re-open if still relevant.
-          exempt-labels: "pinned,announcement"
+          script: |
+            const DAYS_UNTIL_STALE = 30;
+            const DAYS_UNTIL_CLOSE = 7;
+            const STALE_LABEL = "stale";
+            const STALE_MESSAGE = "This discussion has had no activity for 30 days. It will be closed in 7 days unless there is new activity.";
+            const CLOSE_MESSAGE = "Closing due to inactivity. Feel free to re-open if still relevant.";
+            const EXEMPT_LABELS = ["pinned", "announcement"];
+            const BOT_LOGIN = "github-actions[bot]";
+
+            const now = new Date();
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // Look up stale label ID — needed to apply and remove it from discussions
+            const labelResult = await github.graphql(`
+              query($owner: String!, $repo: String!, $name: String!) {
+                repository(owner: $owner, name: $repo) {
+                  label(name: $name) { id }
+                }
+              }
+            `, { owner, repo, name: STALE_LABEL });
+
+            const staleLabelId = labelResult?.repository?.label?.id;
+            if (!staleLabelId) {
+              console.log(`Label "${STALE_LABEL}" not found — skipping discussion stale check`);
+              return;
+            }
+
+            // Fetch open discussions with last 5 comments (enough to find warning + activity)
+            const result = await github.graphql(`
+              query($owner: String!, $repo: String!) {
+                repository(owner: $owner, name: $repo) {
+                  discussions(first: 100, states: OPEN) {
+                    nodes {
+                      id
+                      title
+                      updatedAt
+                      comments(last: 5) {
+                        nodes {
+                          createdAt
+                          body
+                          author { login }
+                        }
+                      }
+                      labels(first: 10) {
+                        nodes { id name }
+                      }
+                    }
+                  }
+                }
+              }
+            `, { owner, repo });
+
+            const discussions = result.repository.discussions.nodes;
+
+            for (const discussion of discussions) {
+              const labels = discussion.labels.nodes.map(l => l.name);
+
+              // Skip exempt discussions
+              if (EXEMPT_LABELS.some(e => labels.includes(e))) continue;
+
+              const isAlreadyStale = labels.includes(STALE_LABEL);
+              const comments = discussion.comments.nodes;
+
+              if (isAlreadyStale) {
+                // Find when the bot posted the stale warning
+                const warningComment = [...comments]
+                  .reverse()
+                  .find(c => c.author?.login === BOT_LOGIN && c.body.includes(STALE_MESSAGE));
+
+                if (!warningComment) {
+                  // Stale label exists but no warning comment found in last 5 — skip safely
+                  console.log(`Stale label found but no warning comment visible: ${discussion.title}`);
+                  continue;
+                }
+
+                const warningDate = new Date(warningComment.createdAt);
+
+                // Check if any non-bot comment was posted AFTER the stale warning
+                const newActivity = comments.find(
+                  c => c.author?.login !== BOT_LOGIN && new Date(c.createdAt) > warningDate
+                );
+
+                if (newActivity) {
+                  // New activity after warning — remove stale label and reset
+                  const staleLabelNode = discussion.labels.nodes.find(l => l.name === STALE_LABEL);
+                  if (staleLabelNode) {
+                    await github.graphql(`
+                      mutation($labelableId: ID!, $labelIds: [ID!]!) {
+                        removeLabelsFromLabelable(input: { labelableId: $labelableId, labelIds: $labelIds }) {
+                          clientMutationId
+                        }
+                      }
+                    `, { labelableId: discussion.id, labelIds: [staleLabelNode.id] });
+                  }
+                  console.log(`Reset stale — new activity found: ${discussion.title}`);
+
+                } else {
+                  // No new activity — check if 7 days since warning
+                  const daysSinceWarning = (now - warningDate) / (1000 * 60 * 60 * 24);
+
+                  if (daysSinceWarning >= DAYS_UNTIL_CLOSE) {
+                    await github.graphql(`
+                      mutation($discussionId: ID!, $body: String!) {
+                        addDiscussionComment(input: { discussionId: $discussionId, body: $body }) {
+                          comment { id }
+                        }
+                      }
+                    `, { discussionId: discussion.id, body: CLOSE_MESSAGE });
+
+                    await github.graphql(`
+                      mutation($discussionId: ID!) {
+                        closeDiscussion(input: { discussionId: $discussionId }) {
+                          discussion { id }
+                        }
+                      }
+                    `, { discussionId: discussion.id });
+
+                    console.log(`Closed: ${discussion.title}`);
+                  } else {
+                    console.log(`Waiting to close: ${discussion.title} (${Math.floor(daysSinceWarning)}d / ${DAYS_UNTIL_CLOSE}d)`);
+                  }
+                }
+
+              } else {
+                // Not yet stale — check last real activity (comments or updatedAt)
+                const lastNonBotComment = [...comments]
+                  .reverse()
+                  .find(c => c.author?.login !== BOT_LOGIN);
+
+                const lastActivity = lastNonBotComment
+                  ? new Date(lastNonBotComment.createdAt)
+                  : new Date(discussion.updatedAt);
+
+                const daysSinceActivity = (now - lastActivity) / (1000 * 60 * 60 * 24);
+
+                if (daysSinceActivity >= DAYS_UNTIL_STALE) {
+                  // Post stale warning
+                  await github.graphql(`
+                    mutation($discussionId: ID!, $body: String!) {
+                      addDiscussionComment(input: { discussionId: $discussionId, body: $body }) {
+                        comment { id }
+                      }
+                    }
+                  `, { discussionId: discussion.id, body: STALE_MESSAGE });
+
+                  // Apply stale label
+                  await github.graphql(`
+                    mutation($labelableId: ID!, $labelIds: [ID!]!) {
+                      addLabelsToLabelable(input: { labelableId: $labelableId, labelIds: $labelIds }) {
+                        clientMutationId
+                      }
+                    }
+                  `, { labelableId: discussion.id, labelIds: [staleLabelId] });
+
+                  console.log(`Marked stale: ${discussion.title}`);
+                }
+              }
+            }
