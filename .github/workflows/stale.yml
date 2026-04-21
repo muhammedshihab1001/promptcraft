@@ -42,7 +42,7 @@ jobs:
 
           # --- Exemptions ---
           exempt-issue-labels: "pinned,security,good first issue"
-          exempt-pr-labels: "pinned,security"
+          exempt-pr-labels: "pinned,security,needs-work"
 
   # Handles Discussions separately (actions/stale does not support discussions)
   stale-discussions:
