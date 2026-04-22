@@ -39,4 +39,4 @@
 - Finding format: Title | Severity | Location | Description | Proof of concept | Fix.
 - Proof of concept must demonstrate but not weaponize.
 - No narrative between findings. No filler text.
-- Executive summary: 3 bullets max — what was tested, what was found, what to fix first.
+- Executive summary: 3 bullets max - what was tested, what was found, what to fix first.

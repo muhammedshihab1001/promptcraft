@@ -18,7 +18,7 @@
 ## Research
 
 - Cite the source type: statute, regulation, case law, or legal commentary.
-- State the jurisdiction and date. Laws change — flag if the area is unsettled or contested.
+- State the jurisdiction and date. Laws change - flag if the area is unsettled or contested.
 - Distinguish between binding authority and persuasive authority.
 - If the law is ambiguous: state both interpretations. Flag the uncertainty clearly.
 
