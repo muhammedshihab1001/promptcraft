@@ -40,6 +40,14 @@ Profiles must:
 - Use plain hyphens only — no em dashes (—)
 - Use straight quotes only — no smart quotes (" " ' ')
 
+### Extends field rules
+
+- Must be a single value — multi-parent syntax is not supported
+- Valid values: a path relative to `profiles/` (e.g. `universal.md`, `developer/backend.md`), or `None`
+- The referenced file must exist in the repo — CI will fail if it does not
+- Use `None` (not `N/A`, not blank) when the profile has no parent
+- Example: `# Extends: universal.md`
+
 ---
 
 ## Free resources standards
@@ -68,10 +76,14 @@ Use these patterns — the auto-labeler depends on them:
 
 | Change type | Branch pattern | Example |
 | --- | --- | --- |
-| New profile | `profile/profile-name` | `profile/data-engineer` |
+| New profile | `profile/profile-name` | `profile/security` |
+| Edit existing profile | `improvement/description` | `improvement/analyst-accuracy` |
 | Fix | `fix/description` | `fix/backend-typo` |
 | Improvement | `improvement/description` | `improvement/agent-error-schema` |
 | Translation | `translation/lang-profilename` | `translation/ml-developer-backend` |
+
+**Important:** Use `improvement/` for edits to existing profiles, not `profile/`.
+Using `profile/` on an edit triggers a minor version bump instead of a patch bump.
 
 **Breaking changes** (removing or renaming required header fields) require the `breaking` label to be added manually by a maintainer before merge. If your PR introduces a breaking change, note it clearly in the PR description.
 
@@ -96,6 +108,7 @@ Use these patterns — the auto-labeler depends on them:
 
 PRs with no activity for 14 days are marked stale automatically.
 They are closed after 7 more days with no activity.
+PRs labeled `needs-work` are exempt from stale closing.
 Re-open if you want to continue.
 
 ---

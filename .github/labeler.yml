@@ -3,12 +3,10 @@
 # Labels are used by release-drafter to sort changes into release note sections.
 # Add new labels here when you add new categories to release-drafter.yml.
 
-# Applied when new profile files are added or changed
+# Applied for new profiles — branch must start with profile/
+# Using head-branch only to avoid labeling profile edits as new features.
+# Edits to existing profiles should use improvement/ branches — see CONTRIBUTING.md.
 feature:
-  - changed-files:
-    - any-glob-to-any-file:
-      - "profiles/**/*.md"
-  # Also applied when the branch name starts with profile/
   - head-branch: ["^profile/"]
 
 # Applied when fixing typos, outdated info, or broken formatting
@@ -33,9 +31,12 @@ free-resources:
       - "free-resources/**"
 
 # Applied when improving an existing profile or config file
+# Also covers all profiles/**/*.md changes — ensures profile edits on any branch
+# get labeled improvement, not feature.
 improvement:
   - changed-files:
     - any-glob-to-any-file:
+      - "profiles/**/*.md"
       - "profiles/universal.md"
       - ".coderabbit.yaml"
       - ".markdownlint.json"
@@ -52,14 +53,11 @@ ci:
       - ".github/release-drafter.yml"
 
 # Applied when adding translated versions of profiles
-# Translation files go in profiles/lang/ — see CONTRIBUTING.md
 translation:
   - changed-files:
     - any-glob-to-any-file:
       - "profiles/lang/**"
   - head-branch: ["^translation/"]
 
-# Applied manually by maintainers only — triggers a major version bump in release-drafter
-# Do not add this label via labeler — it must be a deliberate human decision
-# To use: add the "breaking" label manually to any PR that removes or renames profile fields
+# Applied manually by maintainers only — triggers a major version bump
 # breaking: (intentionally no auto-rule — manual only)

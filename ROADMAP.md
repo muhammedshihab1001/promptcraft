@@ -14,12 +14,12 @@
 
 Priority order — start from the top:
 
-- [ ] **data-engineer** — highest demand, most requested
-- [ ] **security** — pen testing, threat modeling
-- [ ] mobile-dev — iOS, Android, React Native
-- [ ] game-dev — game design and development
-- [ ] educator — teaching, course creation, lesson plans
-- [ ] legal-advisor — legal research and document review
+- [x] **data-engineer** — highest demand, most requested
+- [x] **security** — pen testing, threat modeling
+- [x] mobile-dev — iOS, Android, React Native
+- [x] game-dev — game design and development
+- [x] educator — teaching, course creation, lesson plans
+- [x] legal-advisor — legal research and document review
 
 ## v0.3.0 - Quality and testing
 
