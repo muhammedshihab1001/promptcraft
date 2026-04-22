@@ -49,7 +49,21 @@
     "ELT",
     "idempotency",
     "Automatic1111",
-    "pathlib"
+    "CVE",
+    "CVSS",
+    "OWASP",
+    "XSS",
+    "CSRF",
+    "IDOR",
+    "RCE",
+    "pentest",
+    "pentesting",
+    "SwiftUI",
+    "UIKit",
+    "Jetpack",
+    "CocoaPods",
+    "GDScript",
+    "pooling"
   ],
   "ignorePaths": [
     ".git/**",
