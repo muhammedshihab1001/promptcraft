@@ -37,7 +37,6 @@ improvement:
   - changed-files:
     - any-glob-to-any-file:
       - "profiles/**/*.md"
-      - "profiles/universal.md"
       - ".coderabbit.yaml"
       - ".markdownlint.json"
       - ".cspell.json"

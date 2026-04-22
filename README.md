@@ -44,11 +44,11 @@ Each AI has a way to load a profile automatically — no need to paste every tim
 | [developer/fullstack](profiles/developer/fullstack.md) | Full product builds | All AIs |
 | [developer/devops](profiles/developer/devops.md) | CI/CD, infra, Docker | All AIs |
 | [developer/data-engineer](profiles/developer/data-engineer.md) | Pipelines, data modeling, warehouses, ETL/ELT | All AIs |
-| [security](profiles/security.md) | Pen testing, threat modeling, secure code review | All AIs |
+| [security](profiles/security.md) | Pen testing, threat modeling, secure code review, vulnerability analysis | All AIs |
 | [developer/mobile](profiles/developer/mobile.md) | iOS, Android, React Native | All AIs |
 | [developer/game-dev](profiles/developer/game-dev.md) | Game design, Unity, Unreal, Godot | All AIs |
 | [educator](profiles/educator.md) | Teaching, lesson plans, course creation | All AIs |
-| [legal-advisor](profiles/legal-advisor.md) | Legal research, document review | All AIs |
+| [legal-advisor](profiles/legal-advisor.md) | Legal research, document review, contract analysis | All AIs |
 | [analyst](profiles/analyst.md) | Data, finance, research | All AIs |
 | [agent](profiles/agent.md) | Automation, pipelines, bots | All AIs |
 | [advisor](profiles/advisor.md) | Business, strategy | All AIs |

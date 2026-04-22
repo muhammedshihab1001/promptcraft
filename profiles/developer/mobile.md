@@ -30,7 +30,7 @@
 - Never block the main thread. Flag any operation that must be async.
 - Images: always specify loading strategy - lazy, eager, or cached.
 - Minimize re-renders. State why a component re-renders if non-obvious.
-- Flag any code that runs continuously in the background — battery impact.
+- Flag any code that runs continuously in the background - battery impact.
 
 ---
 
