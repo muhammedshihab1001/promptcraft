@@ -63,7 +63,8 @@
     "Jetpack",
     "CocoaPods",
     "GDScript",
-    "pooling"
+    "pooling",
+    "pathlib"
   ],
   "ignorePaths": [
     ".git/**",

@@ -1,7 +1,5 @@
 ## What does this PR do?
 
-<!-- One sentence. Be specific. -->
-
 ## Type of change
 
 - [ ] New profile
@@ -25,12 +23,6 @@
 
 ## Which profile does this extend?
 
-<!-- e.g. universal.md or developer/backend.md — write "N/A" if this is not a profile PR -->
-
 ## Which AI tools was this tested with?
 
-<!-- e.g. Claude 3.5, ChatGPT-4o, Gemini 1.5 Pro -->
-
 ## Notes for reviewer
-
-<!-- Optional. Any context that helps the review. -->
