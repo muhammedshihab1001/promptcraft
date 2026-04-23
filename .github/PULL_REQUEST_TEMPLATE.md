@@ -1,7 +1,5 @@
 ## What does this PR do?
 
-
-
 ## Type of change
 
 - [ ] New profile
@@ -25,10 +23,6 @@
 
 ## Which profile does this extend?
 
-
-
 ## Which AI tools was this tested with?
-
-
 
 ## Notes for reviewer
