@@ -59,7 +59,7 @@ Each AI has a way to load a profile automatically - no need to paste every time.
 
 ## Resources
 
-- [free-resources](free-resources/README.md) — Free APIs, tools, and software for AI projects
+- [free-resources](free-resources/README.md) - Free APIs, tools, and software for AI projects
 
 ---
 

@@ -61,7 +61,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 - `stale.yml` exempt label fixed and needs-work label added to PR exemptions
 - `pr-greeting.yml` contributor threshold aligned between open and merge jobs
 - `check_profile.py` header field checks scoped to metadata block only
-- `check_profile.py` Extends validation uses pathlib to block path traversal
+- `check_profile.py` Extends validation uses `pathlib` to block path traversal
 - `check_profile.py` now validates header fields have non-empty values
 - `check_profile.py` Extends field checked against filesystem
 - `validate.yml` README index check scoped to Profile index section
