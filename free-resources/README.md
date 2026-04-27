@@ -4,7 +4,7 @@ A curated list of free AI tools, APIs, software, and platforms.
 
 Community maintained — PRs welcome.
 
-> Last full review: 2026-04-19
+> Last full review: 2026-04-27
 > Free tiers change without notice. Verify before relying on any entry.
 > When submitting a PR, include the date you verified the free tier in your PR description.
 
