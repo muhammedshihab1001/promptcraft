@@ -23,9 +23,25 @@ Priority order — start from the top:
 
 ## v0.3.0 - Quality and testing
 
-- [ ] Test results table per profile (which AI, which version, pass/fail)
-- [ ] Automated prompt quality scoring
-- [ ] Benchmark: token cost per profile vs no profile
+Each item below has a GitHub issue with full scope. Work on these in order.
+
+- [ ] **Test results table per profile**
+  - A `## Tested with` section added to each profile file
+  - Columns: AI name, model version, date tested, result (pass/fail), notes
+  - Populated by contributors who test profiles and submit PRs
+  - Tracked in the profile file itself, not a separate document
+
+- [ ] **Automated prompt quality scoring**
+  - A script in `.github/scripts/` that sends each profile to an AI API
+  - Returns a score based on: response follows rules, no filler, correct format
+  - Score stored as a JSON file in `test-results/`
+  - Run manually via `workflow_dispatch` — not on every PR
+
+- [ ] **Benchmark: token cost per profile vs no profile**
+  - Same prompt sent twice: once with profile, once without
+  - Measures: token count, response quality score, time to response
+  - Results stored in `benchmarks/` as JSON and rendered as a table in README
+  - Run manually via `workflow_dispatch`
 
 ## v0.4.0 - Multilingual
 
