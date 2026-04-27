@@ -64,7 +64,11 @@
     "CocoaPods",
     "GDScript",
     "pooling",
-    "pathlib"
+    "pathlib",
+    "semver",
+    "SCD",
+    "benchmarks",
+    "workflow_dispatch"
   ],
   "ignorePaths": [
     ".git/**",
