@@ -30,8 +30,11 @@ Every profile must include this header at the top of the file:
 # Works with: Claude, ChatGPT, Gemini, [others]
 # Best for: [use case]
 # Extends: [parent profile or "None"]
-# Version: [check CHANGELOG.md for the current version number]
+# Version: [version this profile is being introduced in — e.g. 0.2.0]
 ```
+
+Use the version your PR targets. Check the `## [Unreleased]` section in `CHANGELOG.md`
+to find the next planned version number. If unsure, ask in your PR description.
 
 Profiles must:
 - Be testable (paste it into an AI session, run it, it works)
@@ -85,7 +88,9 @@ Use these patterns — the auto-labeler depends on them:
 **Important:** Use `improvement/` for edits to existing profiles, not `profile/`.
 Using `profile/` on an edit triggers a minor version bump instead of a patch bump.
 
-**Breaking changes** (removing or renaming required header fields) require the `breaking` label to be added manually by a maintainer before merge. If your PR introduces a breaking change, note it clearly in the PR description.
+**Breaking changes** (removing or renaming required header fields) require the `breaking` label
+to be added manually by a maintainer before merge. If your PR introduces a breaking change,
+note it clearly in the PR description.
 
 ---
 
