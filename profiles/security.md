@@ -2,7 +2,7 @@
 # Works with: Claude, ChatGPT, Gemini, Mistral, Llama, and others
 # Best for: Pen testing, threat modeling, secure code review, vulnerability analysis
 # Extends: universal.md
-# Version: 0.1.0
+# Version: 0.2.0
 
 ---
 

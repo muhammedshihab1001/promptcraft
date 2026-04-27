@@ -2,7 +2,7 @@
 # Works with: Claude, ChatGPT, Gemini, Mistral, Llama, and others
 # Best for: iOS, Android, React Native mobile development
 # Extends: universal.md
-# Version: 0.1.0
+# Version: 0.2.0
 
 ---
 
