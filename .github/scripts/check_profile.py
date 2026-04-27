@@ -32,13 +32,21 @@ for line in text.splitlines():
 header_text = "\n".join(header_lines)
 
 # Required header fields must exist and have non-empty values
-# Scoped to the header block only — prevents false passes from section headings later in the file
+# Scoped to the header block only — prevents false passes from section headings
 required_fields = ["Name", "Works with", "Best for", "Extends", "Version"]
 for field in required_fields:
     pattern = rf"^# {re.escape(field)}:\s*(.+)$"
     match = re.search(pattern, header_text, re.MULTILINE)
     if not match or not match.group(1).strip():
         print(f"EMPTY or MISSING value for '# {field}:' in {filepath}")
+        failed = True
+
+# Version field must follow semver format X.Y.Z
+version_match = re.search(r"^# Version:\s*(.+)$", header_text, re.MULTILINE)
+if version_match:
+    version_value = version_match.group(1).strip()
+    if not re.match(r'^\d+\.\d+\.\d+$', version_value):
+        print(f"INVALID Version format in {filepath}: '{version_value}' - must be X.Y.Z (e.g. 0.2.0)")
         failed = True
 
 # Extends field must reference a real file strictly inside profiles/
