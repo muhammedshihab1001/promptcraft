@@ -26,19 +26,22 @@ jobs:
 
           while IFS= read -r -d '' file; do
 
-            # Skip the base profile — it intentionally does not extend anything
+            # Skip the base profile - it intentionally does not extend anything
             if [[ "$file" == "profiles/universal.md" ]]; then
               echo "Skipping base profile: $file"
               continue
             fi
 
-            # Skip the image-gen README — it uses a different format
+            # image-gen uses a non-standard format - skip header checks
+            # but still run formatting checks (em dash, smart quotes)
             if [[ "$file" == "profiles/image-gen/README.md" ]]; then
-              echo "Skipping image-gen profile: $file"
+              echo "Checking formatting only: $file"
+              python3 .github/scripts/check_profile.py "$file" --formatting-only
+              if [ $? -ne 0 ]; then FAILED=1; fi
               continue
             fi
 
-            # Skip translation files — they live in profiles/lang/ and may use non-English headers
+            # Skip translation files - they live in profiles/lang/ and may use non-English headers
             if [[ "$file" == profiles/lang/* ]]; then
               echo "Skipping translation file: $file"
               continue
@@ -54,7 +57,7 @@ jobs:
             grep -q "^# Version:"    "$file" || { echo "MISSING: '# Version:' in $file";    FAILED=1; }
 
             # Run the Python checker script for em dash, smart quote, empty value,
-            # and Extends file existence checks.
+            # semver format, and Extends file existence checks.
             python3 .github/scripts/check_profile.py "$file"
 
             if [ $? -ne 0 ]; then
@@ -85,7 +88,6 @@ jobs:
 
             # Check the file path appears as a markdown link in the Profile index section.
             # README rows use the format: | [name](profiles/...md) | ... |
-            # The awk block scopes the search to the ## Profile index section only.
             if ! awk -v f="$file" '
               /^## Profile index/{in_section=1; next}
               /^## /{in_section=0}

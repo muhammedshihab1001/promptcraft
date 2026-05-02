@@ -45,7 +45,7 @@ blurry, low quality, watermark, text, extra limbs, distorted, oversaturated
 
 ## Per-tool Notes
 
-> Last verified: 2026-04-27 — tool limits change with model updates. Check each tool's docs for current values.
+> Last verified: 2026-04-27 - tool limits change with model updates. Check each tool's docs for current values.
 
 | Tool | Max prompt length | Supports negatives | Notes |
 | --- | --- | --- | --- |

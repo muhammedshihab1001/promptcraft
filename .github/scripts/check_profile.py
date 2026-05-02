@@ -4,19 +4,45 @@ import re
 from pathlib import Path
 
 filepath = sys.argv[1]
+formatting_only = "--formatting-only" in sys.argv
+
 text = open(filepath, encoding="utf-8").read()
 failed = False
 
-# Em dash check — profiles must use plain hyphens only
+# Em dash check - profiles must use plain hyphens only
 if "\u2014" in text:
     print(f"FOUND em dash in {filepath} - remove it and use a plain hyphen")
     failed = True
 
-# Smart quote check — profiles must use straight quotes only
+# Smart quote check - profiles must use straight quotes only
 smart_quotes = ["\u2018", "\u2019", "\u201c", "\u201d"]
 if any(c in text for c in smart_quotes):
     print(f"FOUND smart quotes in {filepath} - replace with plain quotes")
     failed = True
+
+# Decorative Unicode check - applies in all modes including formatting-only
+# Covers common decorative characters: ellipsis, bullet, arrows, fancy dashes
+decorative_unicode = [
+    "\u2026",  # horizontal ellipsis ...
+    "\u2022",  # bullet point
+    "\u2013",  # en dash
+    "\u2012",  # figure dash
+    "\u2010",  # hyphen (Unicode, not ASCII)
+    "\u2192",  # right arrow
+    "\u2190",  # left arrow
+    "\u2713",  # check mark
+    "\u2717",  # ballot x
+    "\u00b7",  # middle dot
+]
+found_decorative = [c for c in decorative_unicode if c in text]
+if found_decorative:
+    names = ", ".join(f"U+{ord(c):04X}" for c in found_decorative)
+    print(f"FOUND decorative Unicode in {filepath}: {names} - use plain ASCII equivalents")
+    failed = True
+
+# Stop here if only formatting checks were requested
+if formatting_only:
+    sys.exit(1 if failed else 0)
 
 # Extract only the leading metadata header block
 # Stops at the first line that does not start with "# " after the block begins
@@ -32,7 +58,7 @@ for line in text.splitlines():
 header_text = "\n".join(header_lines)
 
 # Required header fields must exist and have non-empty values
-# Scoped to the header block only — prevents false passes from section headings
+# Scoped to the header block only - prevents false passes from section headings
 required_fields = ["Name", "Works with", "Best for", "Extends", "Version"]
 for field in required_fields:
     pattern = rf"^# {re.escape(field)}:\s*(.+)$"
