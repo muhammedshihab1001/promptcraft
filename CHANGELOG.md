@@ -20,15 +20,33 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [0.2.1] - 2026-04-27
+
+### Fixed
+
+- README.md profile index reordered so all developer/* profiles are grouped together
+- README.md em dashes removed from How to use table and Resources section
+- PULL_REQUEST_TEMPLATE.md em dash replaced, consecutive blank lines removed
+- config.yml blank_issues_enabled set to false - all issue types now have templates
+- Version headers corrected on 6 profiles introduced after v0.1.0
+- CONTRIBUTING.md Version field guidance clarified with explicit instruction
+- ROADMAP.md v0.3.0 items given acceptance criteria and definition of done
+- free-resources README review date updated
+- image-gen README last verified date updated
+- check_profile.py Version field now validated against semver format X.Y.Z
+- cspell.json updated with new technical terms
+
+---
+
 ## [0.2.0] - 2026-04-22
 
 ### Added
 
-- Security profile — pen testing, threat modeling, secure code review
-- Developer profile: mobile — iOS, Android, React Native
-- Developer profile: game-dev — Unity, Unreal, Godot
-- Educator profile — lesson plans, teaching, course creation
-- Legal advisor profile — legal research, document review, contract analysis
+- Security profile - pen testing, threat modeling, secure code review
+- Developer profile: mobile - iOS, Android, React Native
+- Developer profile: game-dev - Unity, Unreal, Godot
+- Educator profile - lesson plans, teaching, course creation
+- Legal advisor profile - legal research, document review, contract analysis
 - Issue templates: CI and documentation
 
 ### Fixed
@@ -100,7 +118,8 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-[Unreleased]: https://github.com/muhammedshihab1001/promptcraft/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/muhammedshihab1001/promptcraft/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/muhammedshihab1001/promptcraft/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/muhammedshihab1001/promptcraft/compare/v0.1.3...v0.2.0
 [0.1.3]: https://github.com/muhammedshihab1001/promptcraft/compare/v0.1.0...v0.1.3
 [0.1.0]: https://github.com/muhammedshihab1001/promptcraft/releases/tag/v0.1.0
