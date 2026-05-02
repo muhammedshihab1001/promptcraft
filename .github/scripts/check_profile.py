@@ -20,6 +20,26 @@ if any(c in text for c in smart_quotes):
     print(f"FOUND smart quotes in {filepath} - replace with plain quotes")
     failed = True
 
+# Decorative Unicode check - applies in all modes including formatting-only
+# Covers common decorative characters: ellipsis, bullet, arrows, fancy dashes
+decorative_unicode = [
+    "\u2026",  # horizontal ellipsis ...
+    "\u2022",  # bullet point
+    "\u2013",  # en dash
+    "\u2012",  # figure dash
+    "\u2010",  # hyphen (Unicode, not ASCII)
+    "\u2192",  # right arrow
+    "\u2190",  # left arrow
+    "\u2713",  # check mark
+    "\u2717",  # ballot x
+    "\u00b7",  # middle dot
+]
+found_decorative = [c for c in decorative_unicode if c in text]
+if found_decorative:
+    names = ", ".join(f"U+{ord(c):04X}" for c in found_decorative)
+    print(f"FOUND decorative Unicode in {filepath}: {names} - use plain ASCII equivalents")
+    failed = True
+
 # Stop here if only formatting checks were requested
 if formatting_only:
     sys.exit(1 if failed else 0)
